@@ -1,40 +1,10 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <title>Execute JavaScript</title>
-</head>
-<body>
-  <form id="jsForm">
-    <label for="jsCode">JavaScript Code:</label><br>
-    <textarea id="jsCode" name="javascript" rows="10" cols="50"></textarea><br>
-    <button type="submit">Execute</button>
-  </form>
-
-  <div id="result"></div>
-
-  <script type="text/javascript">
-    document.getElementById("jsForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      
-      var javascript = document.getElementById("jsCode").value;
-
-      fetch("execute.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: "javascript=" + encodeURIComponent(javascript)
-      })
-      .then(function(response) {
-        return response.text();
-      })
-      .then(function(data) {
-        document.getElementById("result").innerHTML = data;
-      })
-      .catch(function(error) {
-        console.error(error);
-      });
-    });
-  </script>
-</body>
+  <body>
+    <form id="postForm" method="POST" action="generate_cookie.php">
+      <input type="text" name="somehexvalue1" placeholder="Some Hex Value 1" required><br>
+      <input type="text" name="somehexvalue2" placeholder="Some Hex Value 2" required><br>
+      <input type="text" name="somehexvalue3" placeholder="Some Hex Value 3" required><br>
+      <button type="submit">Generate Cookie</button>
+    </form>
+  </body>
 </html>
